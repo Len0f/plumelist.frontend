@@ -1,0 +1,98 @@
+.header {
+  grid-area: 1 / 4 / 2 / 11;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 20px;
+}
+
+.auth {
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+}
+
+.btn {
+  padding: 8px 14px;
+  border-radius: 8px;
+  font-weight: 600;
+  border: 1px solid transparent;
+  cursor: pointer;
+  min-width: 120px;
+}
+
+/* variantes – seulement les différences */
+.btnPrimary {
+  background: #5d2e8c;
+  color: #fff;
+}
+.btnSecondary {
+  background: #fff;
+  border-color: #5d2e8c;
+  color: #5d2e8c;
+}
+.btnDanger {
+  background: #ef4444;
+  color: #fff;
+}
+
+.userBadge {
+  background: #f3f4f6;
+  padding: 8px 12px;
+  border-radius: 999px;
+  font-weight: 600;
+  line-height: 1;
+}
+
+/* --- AntD Modal skin --- */
+.modal :global(.ant-modal-content) {
+  border-radius: 16px;
+  padding: 0;
+}
+
+/* Header de la modale */
+.modalHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 18px;
+  border-bottom: 1px solid #eee;
+}
+.closeBtn {
+  background: transparent;
+  border: 0;
+  font-size: 22px;
+  cursor: pointer;
+  line-height: 1;
+}
+
+/* Corps de la modale */
+.modalBody {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 16px 18px 18px;
+}
+.modalBody input {
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  padding: 10px;
+}
+
+.actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 6px;
+}
+.error {
+  color: #ef4444;
+  font-size: 14px;
+  margin: 4px 0 0;
+}
+
+/* Mobile */
+@media (max-width: 640px) {
+  .btn {
+    min-width: 100px;
+  }
+}

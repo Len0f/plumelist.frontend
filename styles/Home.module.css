@@ -1,22 +1,72 @@
-.main {
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap");
+
+.parent {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  grid-template-rows: repeat(10, 1fr);
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+  background-color: #f1e8b8;
+}
+
+.leftPanel {
+  background-color: #5d2e8c;
+  grid-area: 1 / 1 / 11 / 4;
+  padding: 20px;
+  color: #ffffff;
+}
+
+.mainArea {
+  grid-area: 2 / 4 / 11 / 11;
+  padding: 20px;
+}
+
+/* Panel gauche */
+.logoBlock {
+  text-align: center;
+}
+.logo {
+  width: 100px;
+  height: 100px;
+  margin-bottom: 12px;
+  display: inline-block;
+}
+.titrePlume {
+  text-align: center;
+  font-family: "Playfair Display", serif;
+  font-weight: 700;
+  font-size: 2rem;
+  line-height: 1;
+  margin-bottom: 40px;
+}
+
+/* Grille principale des sections */
+.boardGrid {
+  display: flex;
+  flex-direction: column; /* les sections en colonne */
+  gap: 24px; /* espace entre En cours / À venir / Terminé */
+}
+
+.column h2 {
+  margin-bottom: 12px;
+}
+
+/* Liste horizontale des cartes (en ligne dans chaque section) */
+.tasksRow {
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap; /* retour à la ligne si trop de cartes */
+  gap: 16px;
+  list-style: none;
+}
+
+.tasksList {
+  padding: 0;
+  margin: 0;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  padding: 4rem 0;
-}
-
-.title {
-  line-height: 1.15;
-  font-size: 4rem;
-}
-
-.title a {
-  color: #0070f3;
-  text-decoration: none;
-}
-
-.title a:hover, .title a:focus, .title a:active {
-  text-decoration: underline;
+  gap: 14px; /* mets 8–16px selon ton goût */
+  list-style: none;
 }
