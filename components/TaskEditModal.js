@@ -6,6 +6,7 @@ import UiModal from "./UiModal";
 const STATUS_OPTIONS = [
   { label: "À faire", value: "TODO" },
   { label: "En cours", value: "DOING" },
+  { label: "En pause", value: "PAUSED" },
   { label: "Terminé", value: "DONE" },
 ];
 

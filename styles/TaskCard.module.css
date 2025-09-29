@@ -181,6 +181,22 @@
   filter: brightness(0.96);
 }
 
+.rowCard.todo {
+  border-left: 4px solid var(--plumelist-primary);
+} /* À faire */
+
+/* Card terminée : liseré vert constant */
+.rowCard.done {
+  border-left: 4px solid var(--plumelist-hl); /* vert pâle de ta palette */
+  /* pas de changement de fond ni de texte */
+}
+
+/* Card en pause : on ne grise rien, on change juste le liseré gauche */
+.rowCard.paused {
+  border-left: 4px solid var(--plumelist-paused);
+  /* on conserve le fond, le texte, le hover identiques aux autres */
+}
+
 /* Delete */
 .rowDelete {
   background: #fff;

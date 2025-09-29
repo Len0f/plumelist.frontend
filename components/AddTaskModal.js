@@ -11,8 +11,8 @@ import UiModal from "./UiModal";
 export default function AddTaskModal({ open, onClose, token, onCreated }) {
   const [form] = Form.useForm();
   const [submitting, setSubmitting] = useState(false);
-  const API_BASE = "http://localhost:3000";
-  //process.env.NEXT_PUBLIC_API_URL ||
+  const API_BASE = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000";
+
   const sanitizePartners = (arr) =>
     Array.from(
       new Set(

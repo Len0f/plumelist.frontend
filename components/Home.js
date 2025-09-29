@@ -105,6 +105,7 @@ function Home() {
     () => ({
       DOING: tasks.filter((t) => t && t.status === "DOING"),
       TODO: tasks.filter((t) => t && t.status === "TODO"),
+      PAUSED: tasks.filter((t) => t && t.status === "PAUSED"),
       DONE: tasks.filter((t) => t && t.status === "DONE"),
     }),
     [tasks]
@@ -371,6 +372,33 @@ function Home() {
                       onReplied={onReplied}
                       onPatch={onPatch}
                       onDelete={onDelete}
+                    />
+                  ))}
+                </ul>
+              </section>
+
+              {/* Colonne PAUSED */}
+              <section className={styles.column}>
+                <div className={styles.sectionHeader}>
+                  <span
+                    className={`${styles.sectionPill} ${styles.pillPaused}`}
+                  >
+                    <span className={styles.dot} />
+                    En pause
+                  </span>
+                  <span className={styles.sectionCount}>
+                    {groups.PAUSED.length}
+                  </span>
+                </div>
+
+                <ul className={styles.tasksList}>
+                  {groups.PAUSED.map((t) => (
+                    <TaskCard
+                      key={t._id}
+                      task={t}
+                      onDelete={onDelete}
+                      onPatch={onPatch}
+                      /* Pas de gestion "réponse" pour PAUSED */
                     />
                   ))}
                 </ul>

@@ -238,6 +238,16 @@
   text-decoration: underline;
 }
 
+/* Pastille "En pause" : même base que les autres, dot gris */
+.pillPaused {
+  background: #fff; /* comme .sectionPill par défaut */
+  color: var(--text);
+  border: 1px solid var(--plumelist-paused);
+}
+.pillPaused .dot {
+  background: var(--plumelist-paused);
+}
+
 /* Variante active (couleur turquoise légère) */
 .sideItemActive {
   background: color-mix(in oklab, var(--plumelist-accent), white 86%);

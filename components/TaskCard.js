@@ -54,8 +54,10 @@ export default function TaskCard({
     lastMoveAt,
   } = task;
 
-  const isTodo = status === "TODO";
   const isDoing = status === "DOING";
+  const isTodo = status === "TODO";
+  const isPaused = status === "PAUSED";
+  const isDone = status === "DONE";
   const needsReply = replyState === "TO_REPLY";
   const safeUrl = useMemo(() => normalizeUrl(roleplayUrl), [roleplayUrl]);
 
@@ -108,9 +110,23 @@ export default function TaskCard({
   return (
     <>
       <li
-        className={`${styles.rowCard} ${styles[urgency]}`}
+        className={`${styles.rowCard} ${
+          isPaused
+            ? styles.paused
+            : isDone
+            ? styles.done
+            : isTodo
+            ? styles.todo
+            : styles[urgency]
+        }`}
         title={
-          urgency === "red"
+          isPaused
+            ? "En pause"
+            : isTodo
+            ? "À venir"
+            : isDone
+            ? "Terminé"
+            : urgency === "red"
             ? "Très ancien (> 30 jours)"
             : urgency === "orange"
             ? "Ancien (14–30 jours)"
@@ -181,7 +197,7 @@ export default function TaskCard({
 
         {/* Col 4 — Ligne 1 : Toggle À répondre / Répondu (placeholder sinon) */}
         <div className={styles.cReply}>
-          {isDoing ? (
+          {isDoing && !isPaused ? (
             <button
               type="button"
               className={`${styles.tagBtn} ${needsReply ? styles.tagOn : ""}`}
