@@ -19,19 +19,23 @@
 }
 
 /* Signature collée en bas de la colonne */
+/* Signature collée en bas de la colonne */
 .signature {
   margin-top: auto; /* pousse le bloc en bas */
   font-size: 0.8rem;
-  opacity: 0.8;
+  opacity: 0.9;
   text-align: left; /* ou center si tu préfères */
-  color: #fff;
-  text-decoration: none; /* enlève le souligné */
-  font-weight: bold; /* gras */
-  transition: color 0.2s ease;
   position: absolute;
   left: 16px;
   bottom: 12px;
-  margin-top: 0;
+}
+
+/* Style du lien */
+.signature a {
+  color: #fff; /* blanc */
+  text-decoration: none; /* pas de souligné par défaut */
+  font-weight: bold; /* gras */
+  transition: color 0.2s ease;
 }
 
 .signature a:hover {
