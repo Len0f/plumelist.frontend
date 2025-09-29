@@ -36,7 +36,7 @@ export default function TaskCard({
   onReplied,
   onPatch, // (id, payload) => Promise
   allowEditCreatedAt = true,
-  allowEditLastMoveAt = false,
+  allowEditLastMoveAt = true,
 }) {
   if (!task) return null;
 
@@ -186,13 +186,15 @@ export default function TaskCard({
         {/* Col 3 — Ligne 1 : Dernier mouvement */}
         <div className={styles.cLast}>
           <span className={styles.meta}>
-            Dern. mouv. : {formatDate(lastMoveAt)}
+            Etat changé le : {formatDate(lastMoveAt)}
           </span>
         </div>
 
         {/* Col 3 — Ligne 2 : Créé le */}
         <div className={styles.cCreated}>
-          <span className={styles.meta}>Créé : {formatDate(createdAt)}</span>
+          <span className={styles.meta}>
+            RP créé le : {formatDate(createdAt)}
+          </span>
         </div>
 
         {/* Col 4 — Ligne 1 : Toggle À répondre / Répondu (placeholder sinon) */}
