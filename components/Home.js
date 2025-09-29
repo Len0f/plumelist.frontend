@@ -159,6 +159,37 @@ function Home() {
     [dispatch, postAction]
   );
 
+  // ============
+  // Edition task
+  // ============
+  const onPatch = useCallback(
+    async (id, payload) => {
+      if (!token) throw new Error("Non authentifié");
+      const res = await fetch(`${API_BASE}/tasks/${id}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(payload),
+      });
+      if (res.status === 401) {
+        dispatch(logout());
+        dispatch(clearTasks());
+        throw new Error("Session expirée. Merci de vous reconnecter.");
+      }
+      const data = await safeJson(res);
+      if (!res.ok)
+        throw new Error((data && data.error) || `Erreur (${res.status})`);
+      // ✅ met à jour le store (et donc l'UI) avec la task modifiée
+      dispatch(updateTask(data));
+      // Optionnel : ping la sidebar pour rafraîchir les facettes si forum/character changent
+      setFacetsTick((n) => n + 1);
+      return data;
+    },
+    [token, dispatch]
+  );
+
   // ================
   // Suppression task
   // ================
@@ -311,6 +342,7 @@ function Home() {
                       onFinish={onFinish}
                       onToReply={onToReply}
                       onReplied={onReplied}
+                      onPatch={onPatch}
                       onDelete={onDelete}
                     />
                   ))}
@@ -337,6 +369,7 @@ function Home() {
                       onFinish={onFinish}
                       onToReply={onToReply}
                       onReplied={onReplied}
+                      onPatch={onPatch}
                       onDelete={onDelete}
                     />
                   ))}
@@ -363,6 +396,7 @@ function Home() {
                       onDelete={onDelete}
                       onToReply={onToReply}
                       onReplied={onReplied}
+                      onPatch={onPatch}
                     />
                   ))}
                 </ul>

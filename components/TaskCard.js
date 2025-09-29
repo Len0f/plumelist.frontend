@@ -1,5 +1,6 @@
 import React, { useMemo, useState, useCallback } from "react";
 import styles from "../styles/TaskCard.module.css";
+import TaskEditModal from "./TaskEditModal";
 import UiModal from "./UiModal";
 
 /** dd/mm/yy ou "—" */
@@ -33,6 +34,9 @@ export default function TaskCard({
   onFinish,
   onToReply,
   onReplied,
+  onPatch, // (id, payload) => Promise
+  allowEditCreatedAt = true,
+  allowEditLastMoveAt = false,
 }) {
   if (!task) return null;
 
@@ -57,6 +61,7 @@ export default function TaskCard({
 
   const [pending, setPending] = useState(false);
   const [partnersOpen, setPartnersOpen] = useState(false);
+  const [editOpen, setEditOpen] = useState(false);
 
   const handleStart = useCallback(async () => {
     if (!onStart || pending) return;
@@ -226,6 +231,16 @@ export default function TaskCard({
         <div className={styles.cDelete}>
           <button
             type="button"
+            className={styles.rowEdit}
+            aria-label="Éditer"
+            title="Éditer"
+            onClick={() => setEditOpen(true)}
+            disabled={pending}
+          >
+            ✎
+          </button>
+          <button
+            type="button"
             className={styles.rowDelete}
             aria-label="Supprimer"
             title="Supprimer"
@@ -251,6 +266,16 @@ export default function TaskCard({
           ))}
         </ul>
       </UiModal>
+
+      {/* Modale Édition */}
+      <TaskEditModal
+        open={editOpen}
+        onClose={() => setEditOpen(false)}
+        task={task}
+        onPatch={onPatch}
+        allowEditCreatedAt={allowEditCreatedAt}
+        allowEditLastMoveAt={allowEditLastMoveAt}
+      />
     </>
   );
 }

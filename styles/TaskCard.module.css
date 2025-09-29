@@ -84,11 +84,14 @@
   justify-self: start;
 }
 
+/* Col 5 — zone des deux boutons (éditer à gauche, supprimer à droite) */
 .cDelete {
-  grid-column: 5;
-  grid-row: 1 / span 2;
-  align-self: center;
-  justify-self: center;
+  grid-row: 1 / span 2; /* occupe les 2 lignes */
+  justify-self: end; /* à droite de la colonne */
+  align-self: center; /* 🔥 centre verticalement dans la cellule */
+  display: flex;
+  flex-direction: row;
+  gap: 6px; /* espace entre ✎ et × */
 }
 
 /* Texte principal */
@@ -180,13 +183,36 @@
 
 /* Delete */
 .rowDelete {
-  border: 1px solid color-mix(in oklab, var(--plumelist-warn), white 40%);
-  background: color-mix(in oklab, var(--plumelist-warn), white 86%);
-  color: #8a1b1b;
-  border-radius: var(--r-sm);
-  width: 28px;
-  height: 28px;
+  background: #fff;
+  color: #e74c3c; /* rouge */
+  border: 1px solid #e74c3c;
+  padding: 4px 8px;
   cursor: pointer;
+  font-size: 14px;
+  line-height: 1;
+  border-radius: 6px; /* petit arrondi carré */
+  transition: all 0.2s;
+}
+.rowDelete:hover {
+  background: #e74c3c;
+  color: #fff;
+}
+
+.rowEdit {
+  background: #fff;
+  color: #3498db; /* bleu */
+  border: 1px solid #3498db;
+  padding: 4px 8px;
+  cursor: pointer;
+  font-size: 14px;
+  line-height: 1;
+  border-radius: 6px; /* même forme */
+  transition: all 0.2s;
+  margin-right: 6px; /* espace avant supprimer */
+}
+.rowEdit:hover {
+  background: #3498db;
+  color: #fff;
 }
 
 /* Placeholder (réserve la place quand un slot est vide) */
