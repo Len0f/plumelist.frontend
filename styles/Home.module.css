@@ -7,13 +7,28 @@
   background: var(--plumelist-vanilla);
 }
 
-/* Sidebar plus fine */
+/* Sidebar : occupe toute la hauteur de la grille */
 .leftPanel {
   grid-column: 1 / 2;
-  grid-row: 1 / 3;
-  background: var(--plumelist-primary);
+  grid-row: 1 / -1; /* <<< span sur header + contenu */
+  background-color: #602b91;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  position: relative;
+}
+
+/* Signature collée en bas de la colonne */
+.signature {
+  margin-top: auto; /* pousse le bloc en bas */
+  font-size: 0.8rem;
+  opacity: 0.8;
+  text-align: left; /* ou center si tu préfères */
   color: #fff;
-  padding: 18px;
+  position: absolute;
+  left: 16px;
+  bottom: 12px;
+  margin-top: 0;
 }
 
 /* Zone header & contenu à droite */

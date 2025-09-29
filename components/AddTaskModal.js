@@ -1,9 +1,12 @@
 import React, { useState } from "react";
-import { Form, Input, Select, message } from "antd";
+import { Form, Input, Select, DatePicker, message } from "antd";
+import dayjs from "dayjs"; // ✅ une seule import
 import UiModal from "./UiModal";
 
 /**
- * AddTaskModal : création d’un suivi.
+ * AddTaskModal : création d’un suivi (avec date de création optionnelle).
+ * - Si l’utilisateur choisit une date, on envoie "YYYY-MM-DD" (sans heure).
+ * - Le backend normalise et refuse les dates futures.
  */
 export default function AddTaskModal({ open, onClose, token, onCreated }) {
   const [form] = Form.useForm();
@@ -30,6 +33,11 @@ export default function AddTaskModal({ open, onClose, token, onCreated }) {
         partners: sanitizePartners(values.partners),
       };
 
+      // Date de création optionnelle — format YYYY-MM-DD (sans heure)
+      if (values.createdAt) {
+        payload.createdAt = values.createdAt.format("YYYY-MM-DD");
+      }
+
       const res = await fetch(`${API_BASE}/tasks`, {
         method: "POST",
         headers: {
@@ -38,12 +46,15 @@ export default function AddTaskModal({ open, onClose, token, onCreated }) {
         },
         body: JSON.stringify(payload),
       });
+      console.log("API_BASE =", API_BASE);
 
       if (!res.ok) {
         const data = await res.json().catch(() => ({}));
-        if (res.status === 401)
+        if (res.status === 401) {
           message.error("Session expirée. Merci de vous reconnecter.");
-        else message.error(`${res.status} – ${data.error || "Erreur serveur"}`);
+        } else {
+          message.error(`${res.status} – ${data.error || "Erreur serveur"}`);
+        }
         return;
       }
 
@@ -128,6 +139,18 @@ export default function AddTaskModal({ open, onClose, token, onCreated }) {
           ]}
         >
           <Input placeholder="https://…" inputMode="url" />
+        </Form.Item>
+
+        {/* --- Date de création (optionnelle) --- */}
+        <Form.Item label="Date de création (optionnel)" name="createdAt">
+          <DatePicker
+            style={{ width: "100%" }}
+            placeholder="Choisir une date…"
+            allowClear
+            disabledDate={(current) =>
+              current && current > dayjs().endOf("day")
+            }
+          />
         </Form.Item>
 
         <Form.Item label="Partenaires" name="partners">

@@ -379,6 +379,10 @@ function Home() {
         token={token}
         onCreated={handleCreated}
       />
+      {/* Signature */}
+      <div className={styles.signature}>
+        © {new Date().getFullYear()} — Créé par <strong>Caroline Viot</strong>
+      </div>
     </div>
   );
 }
