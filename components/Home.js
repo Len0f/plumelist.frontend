@@ -443,7 +443,14 @@ function Home() {
       />
       {/* Signature */}
       <div className={styles.signature}>
-        © {new Date().getFullYear()} — Créé par <strong>Caroline Viot</strong>
+        © {new Date().getFullYear()} — Créé par{" "}
+        <a
+          href="https://github.com/Len0f"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <strong>Caroline Viot</strong>
+        </a>
       </div>
     </div>
   );
