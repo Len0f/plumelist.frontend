@@ -25,10 +25,18 @@
   opacity: 0.8;
   text-align: left; /* ou center si tu préfères */
   color: #fff;
+  text-decoration: none; /* enlève le souligné */
+  font-weight: bold; /* gras */
+  transition: color 0.2s ease;
   position: absolute;
   left: 16px;
   bottom: 12px;
   margin-top: 0;
+}
+
+.signature a:hover {
+  color: #ffd700; /* or au survol */
+  text-decoration: underline;
 }
 
 /* Zone header & contenu à droite */
