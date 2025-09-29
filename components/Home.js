@@ -2,9 +2,16 @@ import styles from "../styles/Home.module.css";
 import Header from "../components/Header";
 import TaskCard from "../components/TaskCard";
 import AddTaskModal from "../components/AddTaskModal";
+import SidebarFilters from "../components/SidebarFilter";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect, useMemo, useState } from "react";
-import { setTasks, removeTask, updateTask, addTask } from "../reducers/tasks";
+import { useEffect, useMemo, useState, useCallback } from "react";
+import {
+  setTasks,
+  removeTask,
+  updateTask,
+  addTask,
+  clearTasks,
+} from "../reducers/tasks";
 
 const API_BASE = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000";
 
@@ -13,10 +20,14 @@ function Home() {
   const token = useSelector((s) => s.user.value.token);
   const tasks = useSelector((s) => s.tasks?.value) || [];
   const [isCreateOpen, setIsCreateOpen] = useState(false);
+  const [facetsTick, setFacetsTick] = useState(0); // ← signal de refresh
 
   // Charger les tasks
   useEffect(() => {
-    if (!token) return;
+    if (!token) {
+      dispatch(clearTasks());
+      return;
+    }
     fetch(`${API_BASE}/tasks`, {
       headers: { Authorization: `Bearer ${token}` },
     })
@@ -24,6 +35,12 @@ function Home() {
       .then((data) => dispatch(setTasks(Array.isArray(data) ? data : [])))
       .catch(console.error);
   }, [token, dispatch]);
+
+  // callback pour TasksFilters → remplace la liste affichée
+  const onFiltered = useCallback(
+    (list) => dispatch(setTasks(Array.isArray(list) ? list : [])),
+    [dispatch]
+  );
 
   // Groupes
   const groups = useMemo(
@@ -52,17 +69,30 @@ function Home() {
     dispatch(updateTask(await post(`${API_BASE}/tasks/${id}/replied`)));
 
   const onDelete = async (id) => {
-    await fetch(`${API_BASE}/tasks/${id}`, {
-      method: "DELETE",
-      headers: { Authorization: `Bearer ${token}` },
-    });
-    dispatch(removeTask(id));
+    try {
+      const res = await fetch(`${API_BASE}/tasks/${id}`, {
+        method: "DELETE",
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      if (!(res.status === 204 || res.ok)) {
+        const msg = await res.text().catch(() => "");
+        throw new Error(msg || "Suppression refusée");
+      }
+      // succès => on retire du store
+      dispatch(removeTask(id));
+    } catch (e) {
+      console.error("DELETE /tasks/:id", e);
+      alert("Suppression impossible.");
+    }
   };
 
   // Modale création
   const openCreate = () => setIsCreateOpen(true);
   const closeCreate = () => setIsCreateOpen(false);
-  const handleCreated = (task) => dispatch(addTask(task));
+  const handleCreated = (task) => {
+    dispatch(addTask(task)); // ajoute la task dans la liste
+    setFacetsTick((n) => n + 1); // → demande à SidebarFilters de refetch les facettes
+  };
 
   return (
     <div className={styles.parent}>
@@ -83,19 +113,13 @@ function Home() {
           <button onClick={openCreate}>+ Ajouter un suivi</button>
         </div>
 
-        <h3>Mes personnages</h3>
-        <ul>
-          <li>Nom du personnage</li>
-          <li>Nom du personnage</li>
-          <li>Nom du personnage</li>
-        </ul>
-
-        <h3>Mes forums</h3>
-        <ul>
-          <li>Nom du forum</li>
-          <li>Nom du forum</li>
-          <li>Nom du forum</li>
-        </ul>
+        {token && (
+          <SidebarFilters
+            token={token}
+            onResults={onFiltered}
+            refreshKey={facetsTick} // ← on passe le signal
+          />
+        )}
       </div>
 
       {/* Zone Tasks */}

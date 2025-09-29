@@ -87,6 +87,18 @@ export default function TaskCard({
         </button>
       )}
 
+      {/* dates */}
+      <div className={styles.dates}>
+        <u>
+          <li>
+            <span>Dern. mouv. : {formatDate(lastMoveAt)}</span>
+          </li>
+          <li>
+            <span>Créé : {formatDate(createdAt)}</span>
+          </li>
+        </u>
+      </div>
+
       {/* Flow principal */}
       {isTodo && (
         <button className={styles.primary} onClick={() => onStart?.(_id)}>
@@ -108,12 +120,6 @@ export default function TaskCard({
       >
         ×
       </button>
-
-      {/* dates */}
-      <div className={styles.dates}>
-        <span>Créé : {formatDate(createdAt)}</span>
-        <span>Dern. mouv. : {formatDate(lastMoveAt)}</span>
-      </div>
     </li>
   );
 }
