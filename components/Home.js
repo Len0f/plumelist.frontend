@@ -184,6 +184,7 @@ function Home() {
 
         // succès => on retire du store
         dispatch(removeTask(id));
+        setFacetsTick((n) => n + 1);
       } catch (e) {
         console.error("DELETE /tasks/:id", e);
         alert(e.message || "Suppression impossible.");
