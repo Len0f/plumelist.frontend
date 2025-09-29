@@ -33,6 +33,7 @@
 
 /* Style du lien */
 .signature a {
+  color: #ccff66;
   text-decoration: none; /* pas de souligné par défaut */
   font-weight: bold; /* gras */
   transition: color 0.2s ease;
