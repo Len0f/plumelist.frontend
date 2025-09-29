@@ -218,7 +218,9 @@ export default function TaskCard({
         </div>
 
         {/* Col 4 — Ligne 2 : Action principale */}
-        <div className={styles.cPrimary}>
+        <div
+          className={`${styles.cPrimary} ${isTodo ? styles.cPrimarySpan : ""}`}
+        >
           {isTodo && (
             <button
               type="button"

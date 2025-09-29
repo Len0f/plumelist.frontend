@@ -77,14 +77,21 @@
   align-self: center;
   justify-self: start;
 }
+/* cellule bouton principal (par défaut : rangée 2) */
 .cPrimary {
   grid-column: 4;
   grid-row: 2;
-  align-self: center; /* centre verticalement dans la cellule */
+  align-self: center; /* centre verticalement dans sa rangée */
   justify-self: start;
-  margin-right: 12px; /* espace avec la zone des boutons ✎/× */
+  margin-right: 20px; /* espace avant ✎ / × */
   display: flex;
-  align-items: center; /* centre le contenu */
+  align-items: center;
+}
+
+/* TODO seulement : on occupe les 2 lignes comme ✎ / × */
+.cPrimarySpan {
+  grid-row: 1 / span 2; /* ← aligne pile comme cDelete */
+  align-self: center;
 }
 
 /* Col 5 — zone des deux boutons (éditer à gauche, supprimer à droite) */
@@ -306,10 +313,15 @@
     grid-column: 3;
     grid-row: 3;
   }
-  .cPrimary {
+   .cPrimary {
     grid-column: 3;
     grid-row: 4;
   }
+  .cPrimarySpan {
+    grid-column: 3;
+    grid-row: 1 / span 4;  /* occupe toute la colonne comme cDelete */
+  }
+}
   .cDelete {
     grid-column: 4;
     grid-row: 1 / span 4;
