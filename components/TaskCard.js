@@ -174,7 +174,7 @@ export default function TaskCard({
           <span className={styles.meta}>Créé : {formatDate(createdAt)}</span>
         </div>
 
-        {/* Col 4 — Ligne 2 : Toggle À répondre / Répondu (placeholder sinon) */}
+        {/* Col 4 — Ligne 1 : Toggle À répondre / Répondu (placeholder sinon) */}
         <div className={styles.cReply}>
           {isDoing ? (
             <button
@@ -196,7 +196,7 @@ export default function TaskCard({
           )}
         </div>
 
-        {/* Col 4 — Ligne 1 : Action principale */}
+        {/* Col 4 — Ligne 2 : Action principale */}
         <div className={styles.cPrimary}>
           {isTodo && (
             <button
