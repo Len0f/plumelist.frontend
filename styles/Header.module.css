@@ -3,94 +3,78 @@
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  padding: 20px;
+  padding: 16px 20px;
 }
 
 .auth {
   display: flex;
-  justify-content: center;
-  gap: 25px;
+  gap: 14px;
+  align-items: center;
 }
 
+/* Boutons d’entête */
 .btn {
-  padding: 8px 14px;
-  border-radius: 8px;
+  padding: 9px 14px;
+  border-radius: var(--r-sm);
   font-weight: 600;
   border: 1px solid transparent;
   cursor: pointer;
   min-width: 120px;
+  transition: transform 0.02s, box-shadow 0.2s, background 0.2s, color 0.2s,
+    border-color 0.2s;
+  box-shadow: var(--shadow-sm);
+}
+.btn:active {
+  transform: translateY(1px);
 }
 
-/* variantes – seulement les différences */
 .btnPrimary {
-  background: #5d2e8c;
+  background: var(--plumelist-primary);
   color: #fff;
 }
+.btnPrimary:hover {
+  box-shadow: var(--shadow-md);
+}
+.btnPrimary:focus {
+  outline: 2px solid color-mix(in oklab, var(--plumelist-primary), white 40%);
+  outline-offset: 2px;
+}
+
 .btnSecondary {
   background: #fff;
-  border-color: #5d2e8c;
-  color: #5d2e8c;
+  border-color: var(--plumelist-primary);
+  color: var(--plumelist-primary);
 }
-.btnDanger {
-  background: #ef4444;
-  color: #fff;
+.btnSecondary:hover {
+  background: color-mix(in oklab, var(--plumelist-primary), white 92%);
 }
 
+.btnDanger {
+  background: var(--plumelist-warn);
+  color: #fff;
+}
+.btnDanger:hover {
+  box-shadow: var(--shadow-md);
+}
+
+/* Badge utilisateur */
 .userBadge {
-  background: #f3f4f6;
+  background: color-mix(in oklab, var(--plumelist-accent), white 88%);
+  color: #0b3b37;
   padding: 8px 12px;
   border-radius: 999px;
   font-weight: 600;
   line-height: 1;
+  border: 1px solid color-mix(in oklab, var(--plumelist-accent), black 10%);
 }
 
-/* --- AntD Modal skin --- */
-.modal :global(.ant-modal-content) {
-  border-radius: 16px;
-  padding: 0;
-}
-
-/* Header de la modale */
-.modalHeader {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 16px 18px;
-  border-bottom: 1px solid #eee;
-}
-.closeBtn {
-  background: transparent;
-  border: 0;
-  font-size: 22px;
-  cursor: pointer;
-  line-height: 1;
-}
-
-/* Corps de la modale */
-.modalBody {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  padding: 16px 18px 18px;
-}
-.modalBody input {
-  border: 1px solid #d1d5db;
-  border-radius: 8px;
-  padding: 10px;
-}
-
-.actions {
-  display: flex;
-  gap: 10px;
-  margin-top: 6px;
-}
+/* Erreurs (modales de header) */
 .error {
-  color: #ef4444;
+  color: var(--plumelist-warn);
   font-size: 14px;
-  margin: 4px 0 0;
+  margin-top: 4px;
 }
 
-/* Mobile */
 @media (max-width: 640px) {
   .btn {
     min-width: 100px;

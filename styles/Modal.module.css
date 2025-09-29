@@ -1,0 +1,110 @@
+/* Boutons réutilisables dans les footers de modales */
+.btn {
+  padding: 9px 14px;
+  border-radius: var(--r-sm);
+  font-weight: 600;
+  border: 1px solid transparent;
+  cursor: pointer;
+  min-width: 120px;
+  transition: transform 0.02s, box-shadow 0.2s, background 0.2s, color 0.2s,
+    border-color 0.2s;
+  box-shadow: var(--shadow-sm);
+}
+.btn:active {
+  transform: translateY(1px);
+}
+.btnPrimary {
+  background: var(--plumelist-primary);
+  color: #fff;
+}
+.btnPrimary:hover {
+  box-shadow: var(--shadow-md);
+}
+.btnPrimary:focus {
+  outline: 2px solid color-mix(in oklab, var(--plumelist-primary), white 40%);
+  outline-offset: 2px;
+}
+.btnSecondary {
+  background: #fff;
+  border-color: var(--plumelist-primary);
+  color: var(--plumelist-primary);
+}
+.btnSecondary:hover {
+  background: color-mix(in oklab, var(--plumelist-primary), white 92%);
+}
+
+/* AntD container */
+.modalWide :global(.ant-modal-content) {
+  border-radius: 18px;
+  padding: 0;
+  box-shadow: var(--shadow-md);
+}
+.modalShell {
+  background: #fff;
+  border-radius: 18px;
+  overflow: hidden;
+}
+
+/* Header custom */
+.modalHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 18px;
+  border-bottom: 1px solid var(--border);
+  background: linear-gradient(
+    180deg,
+    color-mix(in oklab, var(--plumelist-primary), white 92%),
+    #fff
+  );
+}
+.modalHead h3 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 800;
+  color: #2b2142;
+}
+.modalClose {
+  background: transparent;
+  border: 0;
+  font-size: 22px;
+  cursor: pointer;
+  color: var(--muted);
+}
+
+/* Body + Footer */
+.modalBodyPad {
+  padding: 16px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.modalFooter {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  padding: 12px 18px 18px;
+  border-top: 1px solid var(--border);
+  background: #fff;
+}
+
+/* Inputs harmonisés (AntD + natifs) */
+.modalBodyPad input,
+.modalBodyPad :global(.ant-select-selector) {
+  border: 1px solid var(--border) !important;
+  border-radius: var(--r-sm) !important;
+  min-height: 38px;
+}
+
+/* --- Messages d'erreur / aide dans les formulaires --- */
+.formError {
+  color: var(--plumelist-warn);
+  font-weight: 600;
+  font-size: 14px;
+  margin-top: 8px;
+}
+.formNote {
+  color: var(--muted);
+  font-size: 12px;
+  margin-top: 4px;
+}
