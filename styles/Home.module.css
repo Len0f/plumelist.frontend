@@ -25,6 +25,7 @@
   font-size: 0.8rem;
   opacity: 0.9;
   text-align: left; /* ou center si tu préfères */
+  color: #fff; /* blanc */
   position: absolute;
   left: 16px;
   bottom: 12px;
@@ -32,7 +33,6 @@
 
 /* Style du lien */
 .signature a {
-  color: #fff; /* blanc */
   text-decoration: none; /* pas de souligné par défaut */
   font-weight: bold; /* gras */
   transition: color 0.2s ease;
