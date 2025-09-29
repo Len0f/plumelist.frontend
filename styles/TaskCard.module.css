@@ -80,8 +80,11 @@
 .cPrimary {
   grid-column: 4;
   grid-row: 2;
-  align-self: center;
+  align-self: center; /* centre verticalement dans la cellule */
   justify-self: start;
+  margin-right: 12px; /* espace avec la zone des boutons ✎/× */
+  display: flex;
+  align-items: center; /* centre le contenu */
 }
 
 /* Col 5 — zone des deux boutons (éditer à gauche, supprimer à droite) */
@@ -168,15 +171,38 @@
 }
 
 /* Action principale */
+/* Base bouton principal */
 .primary {
   border: none;
-  background: var(--plumelist-accent);
   color: #fff;
   border-radius: 10px;
-  padding: 6px 12px;
+  padding: 6px 14px;
   cursor: pointer;
   white-space: nowrap;
+  font-weight: 600;
+  font-size: 14px;
+  transition: background 0.2s, filter 0.2s;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
+
+/* Variante Commencer (violet) */
+.primaryStart {
+  background: var(--plumelist-primary);
+}
+.primaryStart:hover {
+  filter: brightness(0.95);
+}
+
+/* Variante Terminé (turquoise) */
+.primaryFinish {
+  background: var(--plumelist-accent);
+}
+.primaryFinish:hover {
+  filter: brightness(0.95);
+}
+
 .primary:hover {
   filter: brightness(0.96);
 }

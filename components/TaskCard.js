@@ -222,7 +222,7 @@ export default function TaskCard({
           {isTodo && (
             <button
               type="button"
-              className={styles.primary}
+              className={`${styles.primary} ${styles.primaryStart}`}
               onClick={handleStart}
               disabled={pending}
               title="Passer en En cours"
@@ -233,7 +233,7 @@ export default function TaskCard({
           {isDoing && (
             <button
               type="button"
-              className={styles.primary}
+              className={`${styles.primary} ${styles.primaryFinish}`}
               onClick={handleFinish}
               disabled={pending}
               title="Passer en Terminé"
