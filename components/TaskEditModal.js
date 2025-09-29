@@ -62,6 +62,14 @@ export default function TaskEditModal({
       const values = await form.validateFields();
       setSaving(true);
 
+      // Corrige localement si l'utilisateur a choisi un lastMoveAt antérieur
+      const created = values.createdAt || null;
+      let lastMove = values.lastMoveAt || null;
+      if (created && lastMove && lastMove.isBefore(created, "day")) {
+        lastMove = created;
+        form.setFieldsValue({ lastMoveAt: lastMove }); // feedback visuel
+      }
+
       const payload = {
         title: values.title?.trim(),
         forum: values.forum?.trim() || undefined,
@@ -72,13 +80,11 @@ export default function TaskEditModal({
       };
 
       if (allowEditCreatedAt) {
-        if (values.createdAt)
-          payload.createdAt = values.createdAt.format("YYYY-MM-DD");
+        if (created) payload.createdAt = created.format("YYYY-MM-DD");
         else payload.createdAt = undefined; // ne change pas si vide
       }
       if (allowEditLastMoveAt) {
-        if (values.lastMoveAt)
-          payload.lastMoveAt = values.lastMoveAt.format("YYYY-MM-DD");
+        if (lastMove) payload.lastMoveAt = lastMove.format("YYYY-MM-DD");
         else payload.lastMoveAt = undefined;
       }
 
@@ -202,6 +208,15 @@ export default function TaskEditModal({
               style={{ width: "100%" }}
               placeholder="Choisir une date…"
               allowClear
+              disabledDate={(current) => {
+                if (!current) return false;
+                const created = form.getFieldValue("createdAt");
+                const afterToday = current > dayjs().endOf("day");
+                const beforeCreated = created
+                  ? current < created.startOf("day")
+                  : false;
+                return afterToday || beforeCreated;
+              }}
             />
           </Form.Item>
         )}
