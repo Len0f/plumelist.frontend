@@ -30,7 +30,7 @@ export default function TaskEditModal({
   task,
   onPatch, // (id, payload) => Promise
   allowEditCreatedAt = true,
-  allowEditLastMoveAt = false, // mets true si tu veux exposer lastMoveAt
+  allowEditLastMoveAt = true,
 }) {
   const [form] = Form.useForm();
   const [saving, setSaving] = useState(false);
