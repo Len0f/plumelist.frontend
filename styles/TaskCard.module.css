@@ -313,15 +313,14 @@
     grid-column: 3;
     grid-row: 3;
   }
-   .cPrimary {
+  .cPrimary {
     grid-column: 3;
     grid-row: 4;
   }
   .cPrimarySpan {
     grid-column: 3;
-    grid-row: 1 / span 4;  /* occupe toute la colonne comme cDelete */
+    grid-row: 1 / span 4; /* occupe toute la colonne comme cDelete */
   }
-}
   .cDelete {
     grid-column: 4;
     grid-row: 1 / span 4;
