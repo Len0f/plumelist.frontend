@@ -2,7 +2,7 @@
 import { useEffect, useState, useCallback } from "react";
 import styles from "../styles/Home.module.css";
 
-const API_BASE = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000";
+const API_BASE = process.env.NEXT_PUBLIC_API_URL;
 const safeJson = async (res) => {
   try {
     return await res.json();

@@ -14,7 +14,7 @@ import {
 } from "../reducers/tasks";
 import { logout } from "../reducers/user";
 
-const API_BASE = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000";
+const API_BASE = process.env.NEXT_PUBLIC_API_URL;
 
 /** Petit util pour lire du JSON en tolérant les erreurs. */
 const safeJson = async (res) => {

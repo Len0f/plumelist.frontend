@@ -5,7 +5,7 @@ import styles from "../styles/Header.module.css"; // boutons du header (inscript
 import modalStyles from "../styles/Modal.module.css"; // styles des modales (formError, etc.)
 import { register, login, logout } from "../reducers/user";
 
-const API_BASE = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000";
+const API_BASE = process.env.NEXT_PUBLIC_API_URL;
 const STORAGE_KEY = "plumelist_user";
 
 // persistance utilisateur
