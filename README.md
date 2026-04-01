@@ -25,8 +25,11 @@ Lien : [https://plumelist-frontend.vercel.app](https://plumelist-frontend.vercel
 
 - `components/` — Composants React réutilisables
 - `pages/` — Pages Next.js (routing automatique)
+- `public/` — Fichiers statiques
+- `reducers/` — Reducers Redux
 - `styles/` — Fichiers CSS
-- `store/` — Configuration Redux
+- `jest.config.js` — Configuration des tests
+- `next.config.js` — Configuration Next.js
 
 ## Auteur
 
